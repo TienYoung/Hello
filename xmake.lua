@@ -1,8 +1,23 @@
 add_rules("mode.debug", "mode.release")
+set_languages("c89", "cxx14")
 
-target("Hello")
+if is_plat("windows") then 
+    set_toolchains("msvc")
+elseif is_plat("macosx") then
+    set_toolchains("clang")
+else
+    set_toolchains("gcc")
+end 
+
+target("HelloC")
     set_kind("binary")
     add_files("src/*.c")
+    -- add_cflags("/TP")
+
+target("HelloCPP")
+    set_kind("binary")
+    add_files("src/*.cpp")
+    add_cxxflags("/TC")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
