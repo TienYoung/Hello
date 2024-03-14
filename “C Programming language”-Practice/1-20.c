@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 
-#define SPACE "  "   /* define n as a 4 space symbolic parameter */
+#define SPACE "  "   /* define n as a 2 space symbolic parameter */
 #define MAXLINE 1000   /* maximum input line size */
 
 int my_getline(char line[], int maxline);
-void entab(char line[], int len, char to[]);
+void detab(char line[], int len, char to[]);
 int main()
 {
     int len;               /* current line length */
@@ -14,7 +14,7 @@ int main()
 
     while ((len = my_getline(line, MAXLINE)) > 0){
             
-            entab(line,len,to);
+            detab(line,len,to);
             printf("%s", to);
     }
        
@@ -35,25 +35,22 @@ int my_getline(char s[], int lim)
     return i;
 }
 
-/*  entab: replaces strings of blanks by the minimum number of 
-tabs and blanks to achieve the same spacing*/
-void entab(char line[], int len, char to[]){
+/* replaces tabs into n space */
+void detab(char line[], int len, char to[]){
     int j = 0;
-    int state = 0;
     for(int i = 0; i< len; i++){
-        if(line[i] != ' ' && state == 0){
+        if(line[i] == '\t'){
+            strcat(to, SPACE);
+            j += strlen(SPACE);
+            to[j+1] = '\0';/* strcat依赖于目标字符串是一个以`\0`结尾的有效的C字符串。
+            如果`to`数组没有被正确地初始化为一个以`\0`结尾的字符串，
+            `strcat`就会继续在`to`中查找`\0`直到找到为止，
+            这可能会越过数组的边界，导致不可预测的行为，包括奇怪的字符输出。 */
+        }else{
             to[j] = line[i];
+            to[j+1] = '\0';
             j++;
-        }else if (line[i] != ' ' && state == 1){
-            to[j] = ' ';
-            to[j + 1] = line[i];
-            j += 2;
-        }else if (line[i] == ' ' && state == 1){
-            to[j] = '\t';
-            j++;
-            state = 0;
-        }else if (line[i] == ' ' && state == 0){
-            state = 1;
         }
+        
     }
 }

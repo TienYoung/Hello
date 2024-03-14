@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#define SPACE "  "   /* define n as a 4 space symbolic parameter */
 #define MAXLINE 1000   /* maximum input line size */
 
 int my_getline(char line[], int maxline);
