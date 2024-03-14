@@ -3,10 +3,13 @@ set_languages("c89", "cxx14")
 
 if is_plat("windows") then 
     set_toolchains("msvc")
+    add_cxxflags("/TC")
 elseif is_plat("macosx") then
     set_toolchains("clang")
+    add_cxxflags("-x c")
 else
     set_toolchains("gcc")
+    add_cxxflags("-x c")
 end 
 
 target("HelloC")
@@ -17,7 +20,15 @@ target("HelloC")
 target("HelloCPP")
     set_kind("binary")
     add_files("src/*.cpp")
-    add_cxxflags("/TC")
+    -- add_cxxflags("/TC")
+
+target("1-21")
+    set_kind("binary")
+    add_files("src/C_Programming_language-Practice/1-21.c")
+
+target("1-22")
+    set_kind("binary")
+    add_files("src/C_Programming_language-Practice/1-22.c")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io
