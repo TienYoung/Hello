@@ -12,15 +12,15 @@ else
     add_cxxflags("-x c")
 end 
 
-target("HelloC")
-    set_kind("binary")
-    add_files("src/*.c")
-    -- add_cflags("/TP")
+-- target("HelloC")
+--     set_kind("binary")
+--     add_files("src/*.c")
+--     -- add_cflags("/TP")
 
-target("HelloCPP")
-    set_kind("binary")
-    add_files("src/*.cpp")
-    -- add_cxxflags("/TC")
+-- target("HelloCPP")
+--     set_kind("binary")
+--     add_files("src/*.cpp")
+--     -- add_cxxflags("/TC")
 
 target("1-21")
     set_kind("binary")
